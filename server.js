@@ -16,12 +16,13 @@ app.listen(PORT, () => {
 
 app.get('/', mainData)
 app.get('/favorite', favorites)
-app.use(function serverError(req,res,next,arr){
+app.use(serverError)
+    function serverError(error,req,res){
     res.status(500).json({
         "status": 500,
         "responseText": "Sorry, something went wrong"
     })
-})
+}
 app.get('*',pageNotfound)
 
 function favorites(requast, respons) {
