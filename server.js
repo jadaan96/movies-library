@@ -29,7 +29,6 @@ app.get('/upcoming',upcoming)
 
 
 async function trending(requast, respons) {
-    // let movies = new Movie(jsonData.title, jsonData.poster_path, jsonData.overview)
     console.log(Movie.all)
     movies=await axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.API}`)
     movies.data.results.map(items =>
