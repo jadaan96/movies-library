@@ -1,6 +1,7 @@
 
 
 const express = require('express')
+
 const cors = require('cors');
 const axios  = require('axios');
 const app = express()
@@ -13,10 +14,24 @@ app.use(express.json());
 
 app.listen(PORT, () => {
     console.log(`i am ready to gooooooo ${PORT}`)
+
+const cors = require('cors')
+const app = express()
+PORT = 3000
+
+app.use(cors());
+app.use(express.json());
+
+const jsonData = require('./data.json')
+
+app.listen(PORT, () => {
+    console.log('i am ready to gooooooo')
+
 })
 
 app.get('/', mainData)
 app.get('/favorite', favorites)
+
 app.get('/trending',trending)
 app.get('/search',searchFun)
 app.get('/top_rated',topRated)
@@ -67,6 +82,8 @@ function searchFun(req, res) {
     })
   }
 
+
+
 app.use(serverError)
     function serverError(error,req,res){
     res.status(500).json({
@@ -83,9 +100,15 @@ function favorites(requast, respons) {
 
 function mainData(requast, respons) {
 
+
     let firstmovies = new Movie(datajson.title, datajson.poster_path, datajson.overview)
 
     respons.status(200).json(firstmovies)
+
+    let movies = new Movie(jsonData.title, jsonData.poster_path, jsonData.overview)
+    console.log(movies)
+    respons.status(200).json(movies)
+
 }
 
 function pageNotfound(requast, respons) {
@@ -94,6 +117,7 @@ function pageNotfound(requast, respons) {
         message: 'page Not found'
     })
 }
+
 
 
 
@@ -108,3 +132,26 @@ function Movie(id,title, poster_path,release_date, overview) {
 }
 
  Movie.all=[];
+
+function server(requast, respons) {
+    respons.status(500).json({
+        code: 500,
+        message: 'page Not found'
+    })
+}
+
+//    function mainData(respons,requast){
+//     jsonData.map(ele=>
+//         new movie (ele.title,ele.poster_path,ele.overview)
+//      )
+//      respons.status(200).json(allMovie)
+//    }
+
+
+function Movie(title, poster_path, overview) {
+    this.title = title;
+    this.poster_path = poster_path;
+    this.overview = overview;
+}
+
+
