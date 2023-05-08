@@ -7,22 +7,10 @@ const axios  = require('axios');
 const app = express()
 require('dotenv').config()
 const PORT = process.env.PORT || 3005 ;
-const datajson=require('./Movie Data/datajson.json')
+const datajson=require('./MovieData/datajson.json')
 app.use(cors());
 app.use(express.json());
 
-
-app.listen(PORT, () => {
-    console.log(`i am ready to gooooooo ${PORT}`)
-
-const cors = require('cors')
-const app = express()
-PORT = 3000
-
-app.use(cors());
-app.use(express.json());
-
-const jsonData = require('./data.json')
 
 app.listen(PORT, () => {
     console.log('i am ready to gooooooo')
@@ -105,7 +93,7 @@ function mainData(requast, respons) {
 
     respons.status(200).json(firstmovies)
 
-    let movies = new Movie(jsonData.title, jsonData.poster_path, jsonData.overview)
+    let movies = new Movie(datajson.title, datajson.poster_path, datajson.overview)
     console.log(movies)
     respons.status(200).json(movies)
 
