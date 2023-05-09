@@ -17,12 +17,7 @@ app.listen(PORT, () => {
 app.get('/', mainData)
 app.get('/favorite', favorites)
 app.use(serverError)
-    function serverError(error,req,res){
-    res.status(500).json({
-        "status": 500,
-        "responseText": "Sorry, something went wrong"
-    })
-}
+
 app.get('*',pageNotfound)
 
 function favorites(requast, respons) {
@@ -43,19 +38,13 @@ function pageNotfound(requast, respons) {
         message: 'page Not found'
     })
 }
-function server(requast, respons) {
-    respons.status(500).json({
-        code: 500,
-        message: 'page Not found'
-    })
+function serverError(err,req,res){
+  res.status(500).json({
+      "status": 500,
+      "responseText": `Sorry, something went wrong ${err}`
+  })
 }
 
-//    function mainData(respons,requast){
-//     jsonData.map(ele=>
-//         new movie (ele.title,ele.poster_path,ele.overview)
-//      )
-//      respons.status(200).json(allMovie)
-//    }
 
 
 function Movie(title, poster_path, overview) {
