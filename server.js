@@ -29,11 +29,11 @@ app.get('/upcoming',upcoming)
 
 
 async function trending(requast, respons) {
-    console.log(Movie.all)
-    movies=await axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.API}`)
-    movies.data.results.map(items =>
-        new Movie(items.id,items.title, items.release_date,items.poster_path, items.overview) )
+  movies=await axios.get(`https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.API}`)
+  movies.data.results.map(items =>
+    new Movie(items.id,items.title, items.release_date,items.poster_path, items.overview) )
     respons.status(200).json(Movie.all)
+    console.log(Movie.all)
 }
 function searchFun(req, res) {
     const searchQuery = req.query.search;
@@ -61,8 +61,8 @@ function searchFun(req, res) {
   function upcoming(req, res) {
     axios.get(`https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.API}&language=en-US&page=1`).then(result => {
       res.status(200).json({
-        code: 200,
-        movies: result.data.results
+        'code': 200,
+        'movies': result.data.results
       })
     }).catch(err => {
         serverError(err, req, res)
@@ -72,10 +72,10 @@ function searchFun(req, res) {
 
 
 app.use(serverError)
-    function serverError(error,req,res){
+    function serverError(err,req,res){
     res.status(500).json({
         "status": 500,
-        "responseText": "Sorry, something went wrong"
+        "responseText": `Sorry, something went wrong ${err}`
     })
 }
 app.get('*',pageNotfound)
@@ -127,18 +127,5 @@ function server(requast, respons) {
     })
 }
 
-//    function mainData(respons,requast){
-//     jsonData.map(ele=>
-//         new movie (ele.title,ele.poster_path,ele.overview)
-//      )
-//      respons.status(200).json(allMovie)
-//    }
-
-
-function Movie(title, poster_path, overview) {
-    this.title = title;
-    this.poster_path = poster_path;
-    this.overview = overview;
-}
 
 
