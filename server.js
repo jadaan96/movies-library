@@ -72,6 +72,7 @@ function searchFun(req, res) {
 
 
 app.use(serverError)
+
     function serverError(err,req,res){
     res.status(500).json({
         "status": 500,
@@ -105,6 +106,16 @@ function pageNotfound(requast, respons) {
     })
 }
 
+function serverError(err,req,res){
+  res.status(500).json({
+      "status": 500,
+      "responseText": `Sorry, something went wrong ${err}`
+  })
+}
+
+
+
+
 
 
 
@@ -126,6 +137,7 @@ function server(requast, respons) {
         message: 'page Not found'
     })
 }
+
 
 
 
