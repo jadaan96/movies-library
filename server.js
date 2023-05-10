@@ -99,7 +99,7 @@ function addMovies(req, res) {
     serverError(err, req, res,next)
   })
 }
-
+//
 
 app.use(serverError)
 
@@ -129,8 +129,6 @@ function pageNotfound(requast, respons) {
     'message': 'page Not found'
   })
 }
-
-
 
 
 function Movie(id, title, poster_path, release_date, overview) {
